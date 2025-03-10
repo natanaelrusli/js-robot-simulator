@@ -1,0 +1,17 @@
+{
+  "name": "js-robot-simulator",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./cli.js",
+    "test": "npx jest",
+    "test:coverage": "npx jest --coverage"
+  },
+  "keywords": [],
+  "author": "Nata Nael",
+  "license": "ISC",
+  "dependencies": {
+    "jest": "^29.7.0"
+  }
+}
