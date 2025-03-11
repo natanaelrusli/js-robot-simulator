@@ -75,13 +75,13 @@ describe("Test robot movement based on test cases", () => {
       facing: Direction.NORTH,
     });
   });
-  test("test case 5: 8 0 J - RAA - should throw error", () => {
+  test("test case 5: 8 0 J - RAA - should throw error Invalid position!", () => {
     expect(() => {
       const robot = new Robot(8, 0, "J");
       robot.parseCommand("RAA");
     }).toThrow("Invalid position!");
   });
-  test("test case 6: 8 0 N - ABC - should throw error", () => {
+  test("test case 6: 8 0 N - ABC - should throw error Invalid movement!", () => {
     expect(() => {
       const robot = new Robot(8, 0, "N");
       robot.parseCommand("ABC");
