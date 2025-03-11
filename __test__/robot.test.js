@@ -1,4 +1,4 @@
-const { Robot } = require("../src/robot.js");
+const { Robot, Direction } = require("../src/robot.js");
 
 describe("Robot instance", () => {
   test("creates a new Robot instance", () => {
@@ -43,5 +43,48 @@ describe("Robot instance", () => {
     const robot = new Robot(0, 0, "N");
     robot.parseCommand("LALA");
     expect(robot.printPosition()).toBeUndefined();
+  });
+});
+
+describe("Test robot movement based on test cases", () => {
+  test("test case 1: 7 3 N - RAALAL", () => {
+    const robot = new Robot(7, 3, Direction.NORTH);
+    robot.parseCommand("RAALAL");
+    expect(robot.getPosition()).toEqual({ x: 9, y: 4, facing: Direction.WEST });
+  });
+  test("test case 2: 1 1 S - LA", () => {
+    const robot = new Robot(1, 1, Direction.SOUTH);
+    robot.parseCommand("LA");
+    expect(robot.getPosition()).toEqual({ x: 2, y: 1, facing: Direction.EAST });
+  });
+  test("test case 3: 11 9 E - RARARA", () => {
+    const robot = new Robot(11, 9, Direction.EAST);
+    robot.parseCommand("RARARA");
+    expect(robot.getPosition()).toEqual({
+      x: 10,
+      y: 9,
+      facing: Direction.NORTH,
+    });
+  });
+  test("test case 4: 8 0 N - A", () => {
+    const robot = new Robot(8, 0, Direction.NORTH);
+    robot.parseCommand("A");
+    expect(robot.getPosition()).toEqual({
+      x: 8,
+      y: 1,
+      facing: Direction.NORTH,
+    });
+  });
+  test("test case 5: 8 0 J - RAA - should throw error", () => {
+    expect(() => {
+      const robot = new Robot(8, 0, "J");
+      robot.parseCommand("RAA");
+    }).toThrow("Invalid position!");
+  });
+  test("test case 6: 8 0 N - ABC - should throw error", () => {
+    expect(() => {
+      const robot = new Robot(8, 0, "N");
+      robot.parseCommand("ABC");
+    }).toThrow("Invalid movement!");
   });
 });

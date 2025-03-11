@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node ./cli.js",
-    "test": "npx jest --watchAll",
+    "test": "npx jest --watchAll --verbose",
     "test:coverage": "npx jest --coverage"
   },
   "keywords": [],
@@ -13,5 +13,6 @@
   "license": "ISC",
   "dependencies": {
     "jest": "^29.7.0"
-  }
+  },
+  "type": "commonjs"
 }

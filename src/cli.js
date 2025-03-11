@@ -1,5 +1,5 @@
 const readline = require("readline");
-const { Robot } = require("./robot.js");
+const { Robot, Direction } = require("./robot.js");
 
 const rl = readline.createInterface({
   input: process.stdin,
@@ -13,6 +13,7 @@ function askPosition() {
     "Enter initial position (x y facing) [e.g., 7 3 N]: ",
     (answer) => {
       const [x, y, facing] = answer.trim().split(" ");
+      const validDirections = Object.values(Direction);
 
       if (
         !x ||
@@ -20,7 +21,7 @@ function askPosition() {
         !facing ||
         isNaN(x) ||
         isNaN(y) ||
-        !["N", "S", "E", "W"].includes(facing.toUpperCase())
+        !validDirections.includes(facing.toUpperCase())
       ) {
         console.log(
           "Invalid input! Please use format: x y facing (e.g., 7 3 N)"

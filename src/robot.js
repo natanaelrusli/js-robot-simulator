@@ -1,11 +1,37 @@
+const Direction = {
+  NORTH: "N",
+  SOUTH: "S",
+  EAST: "E",
+  WEST: "W",
+};
+
+// Direction mapping for turning right
+const RIGHT_TURNS = {
+  [Direction.NORTH]: Direction.EAST,
+  [Direction.SOUTH]: Direction.WEST,
+  [Direction.EAST]: Direction.SOUTH,
+  [Direction.WEST]: Direction.NORTH,
+};
+
+// Direction mapping for turning left
+const LEFT_TURNS = {
+  [Direction.NORTH]: Direction.WEST,
+  [Direction.SOUTH]: Direction.EAST,
+  [Direction.EAST]: Direction.NORTH,
+  [Direction.WEST]: Direction.SOUTH,
+};
+
 class Robot {
   /**
    * Creates a new Robot instance
    * @param {number} x - Initial x coordinate
    * @param {number} y - Initial y coordinate
-   * @param {string} facing - Initial facing direction ('N', 'S', 'E', or 'W')
+   * @param {Direction} facing - Initial facing direction ('N', 'S', 'E', or 'W')
    */
   constructor(x, y, facing) {
+    if (!Object.values(Direction).includes(facing)) {
+      throw new Error("Invalid position!");
+    }
     this.x = x;
     this.y = y;
     this.facing = facing;
@@ -28,16 +54,16 @@ class Robot {
    */
   moveForward() {
     switch (this.facing) {
-      case "N":
+      case Direction.NORTH:
         this.y++;
         break;
-      case "S":
+      case Direction.SOUTH:
         this.y--;
         break;
-      case "E":
+      case Direction.EAST:
         this.x++;
         break;
-      case "W":
+      case Direction.WEST:
         this.x--;
         break;
     }
@@ -48,20 +74,7 @@ class Robot {
    * @returns {void}
    */
   turnRight() {
-    switch (this.facing) {
-      case "N":
-        this.facing = "E";
-        break;
-      case "S":
-        this.facing = "W";
-        break;
-      case "E":
-        this.facing = "S";
-        break;
-      case "W":
-        this.facing = "N";
-        break;
-    }
+    this.facing = RIGHT_TURNS[this.facing];
   }
 
   /**
@@ -69,20 +82,7 @@ class Robot {
    * @returns {void}
    */
   turnLeft() {
-    switch (this.facing) {
-      case "N":
-        this.facing = "W";
-        break;
-      case "S":
-        this.facing = "E";
-        break;
-      case "E":
-        this.facing = "N";
-        break;
-      case "W":
-        this.facing = "S";
-        break;
-    }
+    this.facing = LEFT_TURNS[this.facing];
   }
 
   /**
@@ -90,6 +90,9 @@ class Robot {
    * ex: RARA will make the robot turn right and then move forward then turn right again and move forward
    */
   parseCommand(command) {
+    if (!command.match(/^[RLA]+$/)) {
+      throw new Error("Invalid movement!");
+    }
     for (let i = 0; i < command.length; i++) {
       const char = command[i];
       if (char === "R") {
@@ -111,4 +114,4 @@ class Robot {
   }
 }
 
-module.exports = { Robot };
+module.exports = { Robot, Direction };
