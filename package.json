@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node ./cli.js",
+    "start": "node ./src/cli.js",
     "test": "npx jest --watchAll --verbose",
     "test:coverage": "npx jest --coverage"
   },
