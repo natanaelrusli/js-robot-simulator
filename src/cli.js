@@ -83,5 +83,5 @@ function askCommands(robot) {
   );
 }
 
-// Start the program
+// Start the program by asking initial position
 askPosition();

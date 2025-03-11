@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node ./cli.js",
-    "test": "npx jest",
+    "test": "npx jest --watchAll",
     "test:coverage": "npx jest --coverage"
   },
   "keywords": [],

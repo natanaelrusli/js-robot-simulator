@@ -1,4 +1,4 @@
-const { Robot } = require("./robot.js");
+const { Robot } = require("../src/robot.js");
 
 describe("Robot instance", () => {
   test("creates a new Robot instance", () => {
