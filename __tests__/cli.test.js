@@ -1,5 +1,6 @@
 // Mock readline
 const readline = require("readline");
+const RobotCLI = require("../src/infrastructure/cli/RobotCLI.js");
 jest.mock("readline");
 
 describe("Test Robot Simulator CLI", () => {
@@ -36,7 +37,10 @@ describe("Test Robot Simulator CLI", () => {
       .mockImplementationOnce((question, cb) => cb("n")); // Don't continue
 
     // Run the CLI
-    require("../src/cli.js");
+    const RobotCLI = require("../src/infrastructure/cli/RobotCLI.js");
+
+    const cli = new RobotCLI();
+    cli.start();
 
     // Check if correct questions were asked
     expect(mockQuestion).toHaveBeenCalledTimes(3);
